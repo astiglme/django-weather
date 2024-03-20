@@ -1,0 +1,75 @@
+- name: Update and upgrade apt packages
+  apt:
+    upgrade: yes
+  tags:
+    - os
+
+- name: Install aptitude
+  apt:
+    name: aptitude
+    state: latest
+  tags:
+    - os
+
+- name: Install required system packages
+  apt:
+    pkg:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+      - python3-pip
+      - virtualenv
+      - python3-setuptools
+    state: latest
+  tags:
+    - os
+
+- name: Add Docker GPG apt Key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+  tags:
+  - docker
+
+#- name: Add Docker Repository
+#  apt_repository:
+#    repo: deb https://download.docker.com/linux/ubuntu focal stable
+#    state: present
+#  tags:
+#    - docker
+
+- name: Update apt and install docker-ce
+  apt:
+    name: docker-ce
+    state: latest
+  tags:
+  - docker
+
+- name: Update apt and install docker-ce-cli
+  apt:
+    name: docker-ce-cli
+    state: latest
+  tags:
+  - docker
+
+- name: Update apt and install docker-ce
+  apt:
+    name: containerd.io
+    state: latest
+  tags:
+  - docker
+
+- name: Install docker compose
+  apt:
+    name: docker-compose-plugin
+    state: latest
+  tags:
+  - docker
+
+- name: Creates directory
+  ansible.builtin.file:
+    path: "{{ app_dir }}"
+    state: directory
+  tags:
+    - app

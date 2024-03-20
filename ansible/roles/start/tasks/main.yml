@@ -1,0 +1,11 @@
+- name: Copy files
+  copy: 
+    src:  "{{ playbook_dir }}/files/"
+    dest: "{{ app_dir }}"
+  tags:
+    - app 
+
+- name: Create and start or recreate services
+  docker_compose:
+    project_src: "{{ app_dir }}"
+    recreate: smart

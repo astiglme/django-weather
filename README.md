@@ -60,6 +60,14 @@ curl -X DELETE http://127.0.0.1:8000/api/daytemp/delete/0
 in weather app directory:
 ```shell
 pip freeze -l > requirements.txt
-docker build -t example.weatherapp:1.0 .
+docker build -t stigito/django-weather:1.0 .
 
+```
+
+## Ansible
+
+```shell
+ansible-playbook -i inventories/local setup.yml --diff --check
+ansible-playbook -i inventories/local start.yml --diff --check
+ansible-playbook -i inventories/local stop.yml --diff --check
 ```

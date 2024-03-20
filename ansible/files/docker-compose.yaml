@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   django:
-    image: example.weatherapp:1.0
+    image: stigito/django-weather:1.0
     ports:
       - "8000:8000"
     depends_on:
@@ -16,3 +16,4 @@ services:
     environment:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_USER=postgres
+      - POSTGRES_DB=weather
